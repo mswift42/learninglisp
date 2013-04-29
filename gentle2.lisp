@@ -208,3 +208,35 @@
     ((zerop num) result)
     (t ( fac-rec-helper (1- num) (* result num)))))
 
+
+(defun square-talk (n)
+  (format t "~&~d squared is ~d" n (* n n)))
+
+(defun test (string)
+  (format t "~&With escape characters: ~S" string)
+  (format t "~&Without escape characters: ~A" string))
+
+(defun print-pilot ()
+  (format t "~&There are old pilots,")
+  (format t "~&and there are bold pilots,")
+  (format t "~&but there are no old bold pilots."))
+
+(defun draw-line (n)
+  (loop
+       for i from 1 to n
+       do (format t "*")))
+
+(defun draw-box (line row)
+  (loop
+       for i from 1 to row
+       do (format t "~%")
+       (loop
+	    for j from 1 to line
+	    do (format t "*"))))
+
+(defun hourly-pay ()
+  (format t "Please type in hourly wage ")
+  (let ((wage (read)))
+    (format t "~&Enter hours worked ")
+    (let ((hours (read)))
+      (format t "~&Your wage is ~d:~%" (* wage hours)))))
