@@ -167,5 +167,44 @@
 (defun cousins (name)
   (mapunion #'children (mapunion #'siblings (parents name))))
 
+(defun descended-from (n1 n2)
+  (or (member n2 (parents n1))
+	     (member n2 (grandparents n1))))
 
+(defun my-reverse (x)
+  (cond ((null x) nil)
+	(t (append (reverse (rest x))
+		   (list (first x))))))
+
+(defun tr-reverse (x)
+  (tr-rev1 x nil))
+
+(defun tr-rev1 (list result)
+  (cond ((null list) result)
+	(t (tr-rev1
+	    (rest list)
+	    (cons (first list) result)))))
+
+
+(defun count-up (num)
+  (cond
+    ((zerop num) nil)
+    (t (append (count-up (1- num)) (list num)))))
+
+(defun count-up-tr (num)
+  (count-up-helper num nil))
+
+(defun count-up-helper (num result)
+  (cond
+    ((zerop num) result)
+    (t (count-up-helper (1- num) (append (list num) result )))))
+
+
+(defun fac-rec (num)
+  (fac-rec-helper num 1))
+
+(defun fac-rec-helper (num result)
+  (cond
+    ((zerop num) result)
+    (t ( fac-rec-helper (1- num) (* result num)))))
 
