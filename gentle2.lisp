@@ -208,6 +208,12 @@
     ((zerop num) result)
     (t ( fac-rec-helper (1- num) (* result num)))))
 
+(defun arith-value (list)
+  (cond
+    ((null list) nil)
+    ((numberp (first list)) (cons (list (second list) (first list)) (arith-value (cadr list))))
+    (t (cons (arith-value (first list)) (arith-value (rest list))))))
+
 
 (defun square-talk (n)
   (format t "~&~d squared is ~d" n (* n n)))
@@ -240,3 +246,7 @@
     (format t "~&Enter hours worked ")
     (let ((hours (read)))
       (format t "~&Your wage is ~d:~%" (* wage hours)))))
+
+
+
+
