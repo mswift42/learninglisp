@@ -265,3 +265,47 @@
 
 
 
+(defun get-tree-data ()
+  (with-open-file (stream "timber.dat")
+    (let* ((tree-loc (read stream))
+	   (tree-table (read stream))
+	   (num-trees (read stream)))
+      (format t "~& There are ~S trees on ~S."
+	      num-trees tree-loc)
+      (format t "~&They are :   ~S" tree-table))))
+
+(defun space-over-rec (n)
+  (cond
+    ((< n 0) (format t "Error!"))
+    ((zerop n) (format t ""))
+    (t (progn
+	 (format t " ")
+	 (space-over-rec (1- n))))))
+
+(defun test (n)
+  (format t "~%>>>")
+  (space-over-rec n)
+  (format t "<<<"))
+
+(defun plot-one-point (plotting-string y-val)
+  (space-over-rec y-val)
+  (format t plotting-string)
+  (format t "~%"))
+
+(defun plot-points (plotting-string valuelist)
+  (loop
+       for i in valuelist
+       do (plot-one-point plotting-string i)))
+
+(defun plot-points-2 (plotting-string valuelist)
+  (mapcar #'(lambda (x) (plot-one-point plotting-string x)) valuelist))
+
+(defun generate (m n)
+  (loop
+       for i from m to n collecting i))
+
+(defun make-graph (func start end plotting-string)
+  (plot-points plotting-string (mapcar func (generate start end))))
+
+(defun square (n)
+  (* n n))
