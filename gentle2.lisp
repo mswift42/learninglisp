@@ -232,6 +232,13 @@
        for i from 1 to n
        do (format t "*")))
 
+(defun draw-line-rec (n)
+  (if
+   (zerop n) nil
+   (progn
+     (format t "*")
+     (draw-line-rec (1- n)))))
+
 (defun draw-box (line row)
   (loop
        for i from 1 to row
@@ -239,6 +246,14 @@
        (loop
 	    for j from 1 to line
 	    do (format t "*"))))
+
+(defun ninety-nine (n)
+  (if
+   (zerop n) nil
+   (progn
+     (format t "~&There are ~d bottles of beer on the wall" n)
+     (format t "~&~d bottles of beer." n)
+     (ninety-nine (1- n)))))
 
 (defun hourly-pay ()
   (format t "Please type in hourly wage ")
