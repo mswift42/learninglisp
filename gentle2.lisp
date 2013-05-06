@@ -320,6 +320,11 @@
 	  "~&That makes ~S glasses so far today."
 	  *total-glasses*))
 
+(defun len (lst)
+  (labels ((rev (lst acc)
+	     (if (null lst) acc
+		 (rev (rest lst) (1+ acc)))))
+    (rev lst 0)))
 
 (defun convert-to-letter (v)
   (cond ((equal v 1) "O")
