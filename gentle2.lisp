@@ -442,3 +442,37 @@
 	(pick-random-empty-position board))))
 
 
+(defun chop-1 (lst)
+  (first lst))
+
+(defun find-first-odd (lst)
+  (dolist (e lst)
+    (format t "~&Testing ~S...." e)
+    (when (oddp e)
+      (format t "found an odd number.")
+      (return e))))
+
+(defun check-all-odd (lst)
+  (dolist (e lst t)
+    (format t "~&Checking ~S..." e)
+    (if (not (oddp e)) (return nil))))
+
+(defun do-member (elem lst)
+  (dolist (e lst nil)
+    (format t "~&Checking ~S..." e)
+    (if (equal e elem) (return t))))
+
+(defun it-assoc (elem lst)
+  (dolist (x lst nil)
+    (format t "~&Checking ~S..." x)
+    (if (member elem x) (return x))))
+
+(defun check-all-odd-rec (lst)
+  (if
+   (null lst)
+   nil
+   (and (oddp (first lst))
+	(check-all-odd-rec (rest lst)))))
+
+
+
