@@ -474,5 +474,11 @@
    (and (oddp (first lst))
 	(check-all-odd-rec (rest lst)))))
 
+(defun it-length (lst)
+  (loop
+       for i in lst count i))
 
-
+(defun it-nth (lst n)
+  (loop
+       for i in lst and a = 0 then (1+ a)
+       when (= n a) return i))
