@@ -482,3 +482,30 @@
   (loop
        for i in lst and a = 0 then (1+ a)
        when (= n a) return i))
+
+(defun launch (n)
+  (do ((cnt n (1- cnt)))
+      ((zerop cnt) (format t "Blast off!"))
+    (format t "~S..." cnt)))
+
+(defstruct starship
+  (name nil)
+  (speed 0)
+  (condition 'green)
+  (shields 'down))
+
+(setf s2 '#s(starship speed (warp 3)
+		       condition red
+		       shields up))
+
+(setf s3 '#s(starship name hoden
+		      speed fast
+		      condition black-metal
+		      shields super))
+  
+(defun alert (x)
+  (setf (starship-shields x) 'up)
+  (if (equal (starship-condition x) 'black-metal)
+      (setf (starship-condition x) 'death-metal))
+  'shields-raised)
+
