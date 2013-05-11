@@ -509,3 +509,11 @@
       (setf (starship-condition x) 'death-metal))
   'shields-raised)
 
+
+(defmacro simple-incf (var)
+  (list 'setq var (list '+ var 1)))
+
+(defmacro set-nil (var)
+  `(setq ,var nil))
+
+
