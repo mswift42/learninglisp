@@ -1,3 +1,4 @@
+;;; Write a program that prints the numbers from 1 to 100. But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz". For numbers which are multiples of both three and five print "FizzBuzz?". 
 (load "~/quicklisp/setup.lisp")
 (ql:quickload "lisp-unit")
 
@@ -23,6 +24,7 @@
 
 
 (defun fizzbuzz (n)
+  "check if divisible by 5 and/or 3."
   (cond
     ((and (zerop (mod n 3))
 	  (zerop (mod n 5)))
@@ -34,6 +36,7 @@
     (t n)))
 
 (defun one-to-hundred ()
+  "print fizzbuzz for range 1,101."
   (loop
        for i from 1 to 100
        do (print (fizzbuzz i))))
