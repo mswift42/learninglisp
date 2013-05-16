@@ -4,6 +4,9 @@
 (lisp-unit:define-test for-2
   (lisp-unit:assert-equal 2 (fizzbuzz 2)))
 
+(lisp-unit:define-test for-3
+  (lisp-unit:assert-equal "Fizz" (fizzbuzz 3)))
+
 (lisp-unit:define-test for-5
   (lisp-unit:assert-equal "Buzz" (fizzbuzz 5)))
 
