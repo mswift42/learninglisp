@@ -36,16 +36,11 @@
 (load "~/quicklisp/setup.lisp")
 (ql:quickload "lisp-unit")
 
-;; (lisp-unit:define-test test-sum-score
-;;   (lisp-unit:assert-equal 300 (sum-score "xxxxxxxxxx"))
-;;   (lisp-unit:assert-equal 10  (sum-score "1-1-1-1-1-1-1-1-1-1-"))
-;;   (lisp-unit:assert-equal 150 (sum-score "5/5/5/5/5/5/5/5/5/5/5"))
-;;   (lisp-unit:assert-equal 68  (sum-score "x455-5-5-5-5-5-5-5-")))
 
 (lisp-unit:define-test test-sum-score
   (lisp-unit:assert-equal 300 (sum-score
 			       (build-sublists (convert-to-list
-						"xxxxxxxxxx"))))
+						"xxxxxxxxxxxx"))))
   (lisp-unit:assert-equal 10 (sum-score
 			      (build-sublists (convert-to-list
 					       "1-1-1-1-1-1-1-1-1-1-"))))
@@ -117,23 +112,24 @@
     ((spare-p (second lst)) 10)
     (t (reduce #'+ lst))))
 
+(defparameter *testlist1* (build-sublists (convert-to-list "xxxxxxxxxx")))
 
 (defun sum-score (lst)
   (cond
     ((null lst) 0)
-    ((strike-p (first lst)) (+ 10 (single-score (second lst))
-			          (sum-score (rest lst))))
-    ((spare-p (first lst)) (+ 10 (if (strike-p (second lst))
-				     10 (first (second lst))) (sum-score (rest lst))))
-    (t (+ ( single-score (first lst)) (sum-score (rest lst))))))
+    ((and (strike-p (first (first lst)))
+	  (strike-p (first (second lst))))
+     (+ 10 (single-score (first (first lst)))
+	   (single-score (first (second lst)))
+	   (sum-score (rest lst))))
+    ((strike-p (first (first lst)))
+     (+ 10 (single-score (second lst)) (sum-score (rest lst))))
+    ((spare-p (first lst)) (+ 10 (if (strike-p (first (second lst)))
+				     10
+				     (first (second lst)))
+			      (sum-score (rest lst))))
+    (t (+ (single-score (first lst)) (sum-score (rest lst))))))
 
 
-
-
-
-
-
-
-
-
-
+(defun score (string)
+  (sum-score (build-sublists (convert-to-list string))))
