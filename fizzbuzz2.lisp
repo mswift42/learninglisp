@@ -46,7 +46,8 @@
 
 (lisp-unit:define-test test-number-to-list
   (lisp-unit:assert-equal '(1 3 3) (number-to-list 133))
-  (lisp-unit:assert-equal '(5) (number-to-list 5)))
+  (lisp-unit:assert-equal '(5) (number-to-list 5))
+  (lisp-unit:assert-equal '(1 2 3 1 2 3) (number-to-list 123123)))
 
 (lisp-unit:define-test test-fizzbuzz-extended
   "test extended version of fizzbuzz. For 35 (has 3 in it 
@@ -56,4 +57,6 @@
   (lisp-unit:assert-equal "Buzz" (fizzbuzz-extended 5))
   (lisp-unit:assert-equal "Fizz" (fizzbuzz-extended 13))
   (lisp-unit:assert-equal "FizzBuzz" (fizzbuzz-extended 15))
-  (lisp-unit:assert-equal "FizzBuzz" (fizzbuzz-extended 35)))
+  (lisp-unit:assert-equal "FizzBuzz" (fizzbuzz-extended 35)))4
+
+
