@@ -117,19 +117,20 @@
 (defun sum-score (lst)
   (cond
     ((null lst) 0)
-    ((and (strike-p (first (first lst)))
-	  (strike-p (first (second lst))))
-     (+ 10 (single-score (first lst))
-	   (single-score (second lst)))
-	   (sum-score (rest lst)))
-    ((strike-p (first (first lst)))
-     (+ 10 (single-score (second lst)) (sum-score (rest lst))))
-    ((spare-p (first lst)) (+ 10 (if (strike-p (first (second lst)))
-				     10
-				     (first (second lst)))
-			      (sum-score (rest lst))))
-    (t (+ (single-score (first lst)) (sum-score (rest lst))))))
-
+    ((and (strike-p (first lst))
+	  (strike-p (second lst))
+	  (strike-p (third lst)))
+     (+ 30 (sum-score (rest lst))))
+    ((and (strike-p (first lst))
+	  (strike-p (second lst)))
+     (+ 20 (first (third lst)) (sum-score (rest lst))))
+    ((strike-p (first lst))
+     (+ 10 (simple-score (second lst)) (sum-score (rest lst))))
+    ((and (spare-p (first lst)) (strike-p (second lst)))
+     (+ 20 (sum-score (rest lst))))
+    (t (simple-score (first lst)) (sum-score (rest lst)))))
 
 (defun score (string)
   (sum-score (build-sublists (convert-to-list string))))
+
+
