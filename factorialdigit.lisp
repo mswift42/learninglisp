@@ -30,4 +30,6 @@
 (defun result (n)
   (non-zero (number-to-list (factorial n))))
 
+(lisp-unit:print-failures (lisp-unit:run-tests))
+
 
