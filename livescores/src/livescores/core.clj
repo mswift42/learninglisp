@@ -21,6 +21,14 @@
        (map :value (map :description (take 20 (:entries (feedparser-clj.core/parse-feed
                                                    (getleague league))))))))
 
+(defn botdesc
+  "return score and description of given feed"
+  [league]
+  (map #(apply str % "\n\n")
+       (interleave (map :title (take 20 (:entries (feedparser-clj.core/parse-feed (getleague league)))))
+            (map :value (map :description (take 20 (:entries (feedparser-clj.core/parse-feed
+                                                              (getleague league)))))))))
+
 
 (defn getscore
   "return parsed title of given feed"
@@ -54,7 +62,7 @@
 (defn updatedesc
   "update TextArea with description of selected league"
   [league]
-  (text! text-area (apply str (getdesc league))))
+  (text! text-area (apply str (botdesc league))))
 
 (defn add-behavior []
   (listen cb :selection (fn [e] (if (= (text (selection group)) "Scores")
