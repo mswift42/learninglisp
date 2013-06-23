@@ -57,10 +57,6 @@
       (listbox-append lb (mapcar #'first *leagues*))
       (pack lb  :side :bottom :anchor :sw  :fill :x)
       (pack scroll  :expand :t :ipady 2 :fill :both)
-      
-      ;; (bind lb "<<ListboxSelect>>" (lambda (event)
-      ;; 				     (feedstr textwin
-      ;; 					      g					      (first (nth (first (listbox-get-selection lb)) *leagues*)))))
       (bind lb "<<ListboxSelect>>" (lambda (event) (update-view textwin lb)))
       (configure f :borderwidth 4)
       (feedstr textwin 'spain))))
