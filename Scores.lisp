@@ -11,6 +11,7 @@
 (in-package :myed)
 
 (defparameter *leagues* '( ( bundesliga "http://rss.kicker.de/live/bundesliga") ( 2-Bundesliga "http://rss.kicker.de/live/2bundesliga") (Belgium "http://rss.kicker.de/live/jupilerleague") (austria "http://rss.kicker.de/live/tmobilebundesliga") ( champions-league "http://rss.kicker.de/live/championsleague") ( DFB-Pokal "http://rss.kicker.de/live/dfbpokal") ( Premier-League "http://rss.kicker.de/live/premierleague") ( England-Championship "http://rss.kicker.de/live/thecocacolafootballleaguechampionship") ( France "http://rss.kicker.de/live/thecocacolafootballleaguechampionship") ( Spain "http://rss.kicker.de/live/primeradivision") ( Kicker-News "http://rss.kicker.de/news/aktuell") ( Scotland "http://rss.kicker.de/live/schottland") ( Switzerland "http://rss.kicker.de/live/axposuperleague") ( Netherlands "http://rss.kicker.de/live/eredivisie")  ))
+
 (defun feedadress (league)
   "Return string of feed-url"
   (first (rest (assoc league *leagues*))))
