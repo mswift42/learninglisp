@@ -10,7 +10,7 @@
 
 (in-package :myed)
 
-(defparameter *leagues* '( ( bundesliga "http://rss.kicker.de/live/bundesliga") ( 2-Bundesliga "http://rss.kicker.de/live/2bundesliga") (Belgium "http://rss.kicker.de/live/jupilerleague") (austria "http://rss.kicker.de/live/tmobilebundesliga") ( champions-league "http://rss.kicker.de/live/championsleague") ( DFB-Pokal "http://rss.kicker.de/live/dfbpokal") ( Premier-League "http://rss.kicker.de/live/premierleague") ( England-Championship "http://rss.kicker.de/live/thecocacolafootballleaguechampionship") ( France "http://rss.kicker.de/live/thecocacolafootballleaguechampionship") ( Spain "http://rss.kicker.de/live/primeradivision") ( Kicker-News "http://rss.kicker.de/news/aktuell") ( Scotland "http://rss.kicker.de/live/schottland") ( Switzerland "http://rss.kicker.de/live/axposuperleague") ( Netherlands "http://rss.kicker.de/live/eredivisie")  ))
+(defparameter *leagues* '( ( bundesliga "http://rss.kicker.de/live/bundesliga") ( 2-Bundesliga "http://rss.kicker.de/live/2bundesliga") (Belgium "http://rss.kicker.de/live/jupilerleague") (austria "http://rss.kicker.de/live/tmobilebundesliga") ( champions-league "http://rss.kicker.de/live/championsleague") ( DFB-Pokal "http://rss.kicker.de/live/dfbpokal") ( Premier-League "http://rss.kicker.de/live/premierleague") ( England-Championship "http://rss.kicker.de/live/thecocacolafootballleaguechampionship") ( France "http://rss.kicker.de/live/thecocacolafootballleaguechampionship") (Italy "http://rss.kicker.de/live/serieatim") ( Spain "http://rss.kicker.de/live/primeradivision") ( Kicker-News "http://rss.kicker.de/news/aktuell") ( Scotland "http://rss.kicker.de/live/schottland") ( Switzerland "http://rss.kicker.de/live/axposuperleague") ( Netherlands "http://rss.kicker.de/live/eredivisie")  ))
 
 (defun feedadress (league)
   "Return string of feed-url"
@@ -23,9 +23,10 @@
 
 
 (defun feedstr (target league)
+  "Convert List of FeedLists to String with extralines after each 
+   feeditem."
   (loop for i in (both-feed league)
         do (append-text target (format nil "~%~A~%~A~%" (first i) (second i)))))
-
 
 
 (defun title-feed (league)
@@ -37,6 +38,7 @@
   (map 'list #'(lambda (x) (rss:description x)) (rss:items (rss:parse-rss-stream (feedurl league)))))
 
 (defun both-feed (league)
+  "'ZIP' both title and description lists."
   (mapcar #'list (title-feed league) (description-feed league)))
 
 (defun score-label (fr)
@@ -63,6 +65,9 @@
 
 
 (defun update-view (target source)
+  "When league in listbox is selected, clear Textwindow. Because 
+   listbox-get-selection only returns the index of its selection
+   return the nth element of *leagues*"
   (clear-text target)
   (feedstr target (first (nth (first (listbox-get-selection source)) *leagues*))))
 
