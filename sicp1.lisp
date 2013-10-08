@@ -30,9 +30,20 @@
 ;; • If a is less than 0, we should count that as 0 ways to make change.
 ;; • If n is 0, we should count that as 0 ways to make change.
 
+(defpackage #:sicp
+  (:use :cl))
+
+(in-package #:sicp)
+
 (defparameter *denoms*
-  '(0.5 0.25 0.10 0.5 0.1))
+  '(50 25 10 5 1))
 
 (defun ways-to-change (amount denoms)
   "how many ways can you make change for amount with the 
-   given denoms.")
+   given denoms."
+  (cond
+    ((zerop amount) 1)
+    ((< amount 0) 0)
+    ((null denoms) 0)
+    (t (+ (ways-to-change amount (rest denoms))
+	  (ways-to-change (- amount (first denoms)) denoms)))))
