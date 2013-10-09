@@ -74,3 +74,6 @@
 
 (define (sum-integers a b)
   (sum identity a inc b))
+
+(define (plus3 n)
+  (map (λ (x) (+ 3 x)) n))
