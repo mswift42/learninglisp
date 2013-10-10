@@ -88,4 +88,63 @@
 			 (mr (cdr lst))))))))
     (mr lst)))
 
+(define (rember-f test?)
+  (lambda (a l)
+    (cond
+     ((null? l) '())
+     ((test? (first l) a) (cdr l))
+     (else (cons (first l)
+		 ((rember-f test?) a
+		  (cdr l)))))))
+
+(define rember-eq?
+  (rember-f eq?))
+
+(define (multirember-f test?)
+  (lambda (a lst)
+    (cond
+     ((null? lst) '())
+     ((test? (first lst) a)
+      ((multirember-f test?) a
+       (cdr lst)))
+     (else (cons (first lst)
+		 ((multirember-f test?) a (cdr lst)))))))
+
+(define (union s1 s2)
+  (cond
+   ((null? s1) s2)
+   ((member? (first s1) s2)
+    (union (cdr s1) s2))
+   (else (cons (first s1)
+	       (union (cdr s1) s2)))))
+
+(define (union-b s1 s2)
+  (letrec ((u (lambda (set)
+		(cond
+		 ((null? set) s2)
+		 ((member? (first set) s2)
+		  (u (cdr set)))
+		 (else (cons (car set)
+			     (u (cdr set))))))))
+    (u s1)))
+
+
+
+(define (intersect s1 s2)
+  (cond
+   ((null? s1) '())
+   ((member? (first s1) s2)
+    (cons (first s1) (intersect (cdr s1) s2)))
+   (else (intersect (cdr s1) s2))))
+
+(define (intersect-b s1 s2)
+  (letrec ((i (lambda (set)
+		(cond
+		 ((null? set) '())
+		 ((member? (first set) s2)
+		  (cons (first set) (i (cdr set))))
+		 (else (i (cdr set)))))))
+    (i s1)))
+
+
 
