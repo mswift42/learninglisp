@@ -28,3 +28,26 @@
       #f
       (or (is-first? (first lst) (cdr lst))
 	  (two-in-a-row?-b (cdr lst)))))
+
+
+(define (two-in-a-row?-c preceeding lst)
+  (if (null? lst)
+      #f
+      (or (eq? (first lst) preceeding)
+	  (two-in-a-row?-c (first lst)
+			   (cdr lst)))))
+
+(define (two-in-a-row-b? lst)
+  (if (null? lst)
+      #f
+      (two-in-a-row?-c (first lst) (cdr lst))))
+
+(define (sum-of-prefixes-b sumsf lst)
+  (if (null? lst) '()
+      (cons (+ sumsf (first lst))
+	    (sum-of-prefixes-b
+	     (+ sumsf (first lst))
+	     (cdr lst)))))
+
+(define (sum-of-prefixes lst)
+  (sum-of-prefixes-b 0 lst))
