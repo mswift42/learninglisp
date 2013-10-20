@@ -59,5 +59,10 @@
   (let ((result (remove nil list)))
     (apply #'+ result)))
 
-
+(defun stable-union (l1 l2)
+  "union of two lists."
+  (loop for i in l2
+     unless (member i l1)
+     collect i into res
+     finally (return (append l1 res))))
 
