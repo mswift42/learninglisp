@@ -66,3 +66,14 @@
      collect i into res
      finally (return (append l1 res))))
 
+(defun stable-intersection (l1 l2)
+  "intersection of two lists"
+  (loop for i in l1
+        when (member i l2)
+        collect i))
+
+(defun stable-set-difference (l1 l2)
+  (loop
+       for i in l1
+       unless (member i l2)
+       collect i))
