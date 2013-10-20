@@ -85,4 +85,12 @@
 	(push (cons i (count i list)) result)))
     (sort result #'(lambda (a b) (> (rest a) (rest b))))))
 
+(defun position+ (list)
+  (loop for i in list
+        and j from 0
+        collect (+ i j)))
+
+(defun position+-2 (list)
+  (mapcar #'(lambda (x) (+ x (position x list))) list))
+
 
