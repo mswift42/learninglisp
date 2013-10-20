@@ -69,11 +69,20 @@
 (defun stable-intersection (l1 l2)
   "intersection of two lists"
   (loop for i in l1
-        when (member i l2)
-        collect i))
+     when (member i l2)
+     collect i))
 
 (defun stable-set-difference (l1 l2)
   (loop
        for i in l1
        unless (member i l2)
        collect i))
+
+(defun occurrences (list)
+  (let ((result nil))
+    (dolist (i list)
+      (unless (assoc i result)
+	(push (cons i (count i list)) result)))
+    (sort result #'(lambda (a b) (> (rest a) (rest b))))))
+
+
