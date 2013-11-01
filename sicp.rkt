@@ -78,3 +78,49 @@
 (define (plus3 n)
   (map (λ (x) (+ 3 x)) n))
 
+
+
+(define (last-pair lst)
+  (cond
+   ((null? lst) '())
+   ((null? (rest lst)) (first lst))
+   (else (last-pair (rest lst)))))
+
+(define (butlast lst)
+  (cond
+   [(null? lst) '()]
+   [(null? (rest lst)) '()]
+   [else (cons (first lst) (butlast (rest lst)))]))
+
+(define (mreverse lst)
+  (cond
+   [(null? lst) '()]
+   [else (cons (last-pair lst) (mreverse (butlast lst)))]))
+
+(define us-coins (list 50 25 10 5 1))
+(define uk-coins (list 100 50 20 10 5 2 1 0.5))
+
+(define (cc amount coins)
+  (cond
+   [(= 0 amount) 1]
+   [(< amount 0) 0]
+   [(null? coins) 0]
+   [else (+ (cc amount (rest coins))
+	    (cc (- amount (first coins)) coins))]))
+
+(define (f w . x)
+  x)
+
+(define (same-parity f . r)
+  (if
+   (odd? f)
+   (cons f (filter odd? r))
+   (cons f (filter even? r))))
+
+
+
+
+
+
+
+
