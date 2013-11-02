@@ -20,4 +20,11 @@
    (listp exp) exp
    (list exp)))
 
+(defmacro random-do (&rest rest)
+  (let ((len (length rest)))
+    `(case (random ,len)
+       ,@(loop for a from 0
+	       for i in rest
+	       collect (list a i)))))
+
 (run!)
