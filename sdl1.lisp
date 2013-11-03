@@ -23,14 +23,9 @@
        
        
        ;; Draw the box having a center at the mouse x/y coordinates.
-       
-       
 
        ;; Redraw the display
        (sdl:update-display)))))
-
-
-
 
 (defun opengl-test-1 ()
   (sdl:with-init ()
@@ -62,14 +57,14 @@
 
 (defun sdl-2-2 ()
   (sdl:with-init ()
-    (sdl:window 700 800 :title-caption "brueste sind am besten!")
+    (sdl:window 700 800 :title-caption "the title")
     (setf (sdl:frame-rate) 60)
     (sdl:with-events ()
-      (:quit-event t)
+      (:quit-event () t)
       (:key-down-event (:key key)
 		       (when (sdl:key= key (or  :sdl-key-escape :sdl-key-space))
 			 (sdl:push-quit-event)))
       (:idle ()
-       (sdl:draw-string-solid-* "pimmel" 20 20)))))
+       (sdl:update-display)))))
 
 
