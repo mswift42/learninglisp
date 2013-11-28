@@ -39,3 +39,15 @@
     (loop for i in list
 	  do (pushnew (cons i (count i list)) result)
 	  finally (return (sort (reverse result) #'> :key #'cdr)))))
+
+(defun plus+ (list)
+  "return a list of each element in orig.list + index:
+   (plus+ '(2 4 5) -> '(2 5 7). a) mapcar:"
+  (mapcar #'(lambda (x) (+ x (position x list))) list))
+
+(defun plus+2 (list)
+  "same as above using loop"
+  (loop for i in list and a from 0
+        collect (+ i a)))
+
+
