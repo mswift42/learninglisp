@@ -49,3 +49,14 @@ supplied. If no argument is supplied call function with 56 as argument."
        (t (message "argument is less than fill-column")))
     (compare-fill-column-2 56)))
 
+;; 6.3 Exercise with Narrowing
+(defun show-first-sixty ()
+  "display the first 60 characters of the current buffer."
+  (interactive)
+  (push-mark)
+  (save-restriction
+    (save-excursion
+      (widen)
+      (beginning-of-buffer)))
+  (narrow-to-region 1 60))
+
