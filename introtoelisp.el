@@ -49,6 +49,15 @@ supplied. If no argument is supplied call function with 56 as argument."
        (t (message "argument is less than fill-column")))
     (compare-fill-column-2 56)))
 
+(cl-defun compare-fill-column-3 (&optional (arg 56))
+  "version three of compare-fill-column. supply default
+  argument in lambda list. In order to use default argument 
+  values, you have to use cl-defun in elisp."
+  (cond
+       ((> arg fill-column) (message "argument is bigger than fill-column"))
+       ((= arg fill-column) (message "argument is equal to fill-column"))
+       (t (message "argument is less than fill-column"))))
+
 ;; 6.3 Exercise with Narrowing
 (defun show-first-sixty ()
   "display the first 60 characters of the current buffer."
