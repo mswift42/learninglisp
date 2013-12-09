@@ -27,6 +27,25 @@
       (message "Yep, buffer exists with the name %s" (get-buffer buffer))
     (message "No buffer does not exist")))
 
+;; 5.5 Optional Argument Exercise
+(defun compare-fill-column (&optional arg)
+  (if arg
+      (cond
+       ((> arg fill-column) (message "argument is bigger than fill column"))
+       ((= arg fill-column) (message "argument is equal to fill-column"))
+       (t (message "argument is less than fill-column")))
+    (cond
+     ((> 56 fill-column) (message "56 is bigger than fill-column"))
+     ((= 56 fill-column) (message "56 is equal to fill-column"))
+     (t (message "56 is smaller than fill-column")))))
 
-
+(defun compare-fill-column-2 (&optional arg)
+  "version two of compare-fill-column. As before check for argument 
+supplied. If no argument is supplied call function with 56 as argument."
+  (if arg
+      (cond
+       ((> arg fill-column) (message "argument is bigger than fill-column"))
+       ((= arg fill-column) (message "argument is equal to fill-column"))
+       (t (message "argument is less than fill-column")))
+    (compare-fill-column-2 56)))
 
