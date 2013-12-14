@@ -22,7 +22,7 @@
 
 (defun buffer-p (buffer)
   "check whether buffer exists."
-  (interactive "P\nbEnter name of buffer: ")
+  (interactive "bEnter name of buffer: ")
   (if (get-buffer buffer)
       (message "Yep, buffer exists with the name %s" (get-buffer buffer))
     (message "No buffer does not exist")))
@@ -68,4 +68,22 @@ supplied. If no argument is supplied call function with 56 as argument."
       (widen)
       (beginning-of-buffer)))
   (narrow-to-region 1 60))
+
+;; 7.7 cons
+(defun birdlist ()
+  (list 'sparrow 'hawk 'eagle 'vulture)) 
+
+(defun replace-first ()
+  (let ((bl (birdlist)))
+    (setcar bl 'trout)
+    bl))
+
+
+;; 8.7 Searching Exercises
+(defun test-search (string)
+  "If successful search of string, message Found!"
+  (interactive "sEnter String: ")
+   (when (search-forward string)
+     (message "Found!")))
+
 
