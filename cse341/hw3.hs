@@ -17,3 +17,15 @@ onlyCapitals = filter (isUpper . head)
 longestString1 :: [String] -> String
 longestString1 [] = ""
 longestString1 xs = foldl1 (\x y -> if length x > length y then x else y ) xs
+
+longestString2 :: [String] -> String
+longestString2 [] = ""
+longestString2 xs = foldl1 (\x y -> if length y >= length x then y else x) xs
+
+longestCapitalized :: [String] -> String
+longestCapitalized [] = ""
+longestCapitalized xs = longestString2 $ onlyCapitals xs
+
+revString :: String -> String
+revString "" = ""
+revString s = last s : revString (init s)
