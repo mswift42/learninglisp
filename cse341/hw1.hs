@@ -1,3 +1,5 @@
+-- CSE 341, Spring 2013, Assignment 1
+
 data Date = D Int Int Int
 
 
@@ -10,8 +12,11 @@ month (D _ m _) = m
 day :: Date -> Int
 day (D d _ _ ) = d
 
-sumdays :: Date -> Int
-sumdays d = (year d) * 365 + (month d) * 12 + (day d)
+sumDays :: Date -> Int
+sumDays d = year d * 365 + month d * 12 + day d
 
-is_older:: Date -> Date -> Bool
-is_older d1 d2 = sumdays d1 > sumdays d2
+isOlder:: Date -> Date -> Bool
+isOlder d1 d2 = sumDays d1 > sumDays d2
+
+numberInMonth :: [Date] -> Int -> Int
+numberInMonth xs m = length $ filter (== m) $ map month xs
