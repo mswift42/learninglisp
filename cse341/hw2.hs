@@ -22,4 +22,20 @@ allExceptOption s (x:xs) | x == s = xs
 getSubstitutions [] _ = []
 getSubstitutions (x:xs) s = go (x:xs) s [] where
   go [] _ _ = []
-  go (x:xs) s acc = go xs s acc ++ (allExceptOption s x)
+  go (x:xs) s acc = go xs s acc ++ allExceptOption s x
+
+data Suit = Clubs | Diamonds | Spades | Hearts deriving Show
+data Rank = Jack | Queen | King | Ace | Num Int deriving (Eq,Show)
+type Card = (Suit, Rank)
+data Color = Black | Red
+
+cardColor :: Card -> Color
+cardColor (Clubs,_) = Black
+cardColor (Spades,_) = Black
+cardColor (_,_) = Red
+
+cardValue :: Card -> Int
+cardValue (_,rank) = case rank of
+  Num n -> n
+  Ace -> 11
+  _ -> 10
