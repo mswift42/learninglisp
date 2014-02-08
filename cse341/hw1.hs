@@ -20,3 +20,7 @@ isOlder d1 d2 = sumDays d1 > sumDays d2
 
 numberInMonth :: [Date] -> Int -> Int
 numberInMonth xs m = length $ filter (== m) $ map month xs
+
+numberInMonths :: [Date] -> [Int] -> Int
+numberInMonths _ [] = 0
+numberInMonths dates (x:xs) = numberInMonth dates x +  numberInMonths dates xs
