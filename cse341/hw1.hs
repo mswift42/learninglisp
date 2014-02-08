@@ -38,3 +38,8 @@ getNth (x:xs) n = getNth xs (n - 1)
 dateToString :: Date -> String
 dateToString d = getNth months (month d) ++ " " ++ show (day d) ++ ", " ++ show (year d)
                  where months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+numberBeforeReachingSum :: Int -> [Int] -> Int
+numberBeforeReachingSum s (x:y:xs) | x > s = 0
+                                   | (x < s) && (x + y > s )= 1
+                                   |otherwise = 1+ numberBeforeReachingSum s (y:xs)
