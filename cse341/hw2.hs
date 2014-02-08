@@ -24,10 +24,10 @@ getSubstitutions (x:xs) s = go (x:xs) s [] where
   go [] _ _ = []
   go (x:xs) s acc = go xs s acc ++ allExceptOption s x
 
-data Suit = Clubs | Diamonds | Spades | Hearts deriving Show
+data Suit = Clubs | Diamonds | Spades | Hearts deriving (Eq,Show)
 data Rank = Jack | Queen | King | Ace | Num Int deriving (Eq,Show)
 type Card = (Suit, Rank)
-data Color = Black | Red
+data Color = Black | Red deriving (Eq,Show )
 
 cardColor :: Card -> Color
 cardColor (Clubs,_) = Black
@@ -48,3 +48,8 @@ removeCard (x:xs) c | x == c = xs
 allSameColor :: [Card] -> Bool
 allSameColor xs = all (==s) $ map cardColor xs
   where s = cardColor (head xs)
+
+sumCards :: [Card] -> Int
+sumCards xs = go xs 0
+              where go [] acc = acc
+                    go (x:xs) acc = go xs acc + cardValue x
