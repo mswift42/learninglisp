@@ -30,3 +30,11 @@ datesInMonth dates m = filter (\x -> month x == m) dates
 datesInMonths :: [Date] -> [Int] -> [Date]
 datesInMonths _ [] = []
 datesInMonths dates (x:xs) = datesInMonth dates x ++ datesInMonths dates xs
+
+getNth :: [a] -> Int -> a
+getNth (x:xs) 1 = x
+getNth (x:xs) n = getNth xs (n - 1)
+
+dateToString :: Date -> String
+dateToString d = getNth months (month d) ++ " " ++ show (day d) ++ ", " ++ show (year d)
+                 where months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
