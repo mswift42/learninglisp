@@ -39,3 +39,12 @@ cardValue (_,rank) = case rank of
   Num n -> n
   Ace -> 11
   _ -> 10
+
+removeCard :: [Card] -> Card -> [Card]
+removeCard [] _ = fail "Card not in List"
+removeCard (x:xs) c | x == c = xs
+                    | otherwise = x : removeCard xs c
+
+allSameColor :: [Card] -> Bool
+allSameColor xs = all (==s) $ map cardColor xs
+  where s = cardColor (head xs)
