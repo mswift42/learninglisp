@@ -1,7 +1,6 @@
 -- CSE 341, Spring 2013, Assignment 1
 
-data Date = D Int Int Int
-
+data Date = D Int Int Int deriving Show
 
 year :: Date -> Int
 year (D _ _ y) = y
@@ -24,3 +23,10 @@ numberInMonth xs m = length $ filter (== m) $ map month xs
 numberInMonths :: [Date] -> [Int] -> Int
 numberInMonths _ [] = 0
 numberInMonths dates (x:xs) = numberInMonth dates x +  numberInMonths dates xs
+
+datesInMonth :: [Date] -> Int -> [Date]
+datesInMonth dates m = filter (\x -> month x == m) dates
+
+datesInMonths :: [Date] -> [Int] -> [Date]
+datesInMonths _ [] = []
+datesInMonths dates (x:xs) = datesInMonth dates x ++ datesInMonths dates xs
